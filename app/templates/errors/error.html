@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ status_code }} - Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <style>
+        .error-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .error-content {
+            text-align: center;
+            color: white;
+        }
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-code">{{ status_code }}</div>
+            <h1>{{ message }}</h1>
+            <p>{{ description }}</p>
+            <a href="{{ url_for('dashboard.index') }}" class="btn btn-light mt-4">Go Home</a>
+        </div>
+    </div>
+</body>
+</html>

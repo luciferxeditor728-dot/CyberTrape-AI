@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - CyberTrap-AI{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1>Dashboard</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h6 class="card-title text-uppercase">Active Honeypots</h6>
+                    <h2>12</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger">
+                <div class="card-body">
+                    <h6 class="card-title text-uppercase">Critical Alerts</h6>
+                    <h2>5</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h6 class="card-title text-uppercase">Attacks Detected</h6>
+                    <h2>234</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h6 class="card-title text-uppercase">Total Users</h6>
+                    <h2>8</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Activity</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Brute Force Attack Detected</h6>
+                                <small>2 hours ago</small>
+                            </div>
+                            <p class="mb-1">Honeypot SSH-01 detected 100+ failed login attempts from 192.168.1.1</p>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Port Scanning Activity</h6>
+                                <small>5 hours ago</small>
+                            </div>
+                            <p class="mb-1">Honeypot HTTP-01 detected port scanning from 10.0.0.5</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Top Threats</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item">
+                            <h6 class="mb-1">Brute Force</h6>
+                            <span class="badge bg-danger">45%</span>
+                        </div>
+                        <div class="list-group-item">
+                            <h6 class="mb-1">Port Scanning</h6>
+                            <span class="badge bg-warning">30%</span>
+                        </div>
+                        <div class="list-group-item">
+                            <h6 class="mb-1">Malware Detection</h6>
+                            <span class="badge bg-info">15%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
