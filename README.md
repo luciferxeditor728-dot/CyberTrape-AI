@@ -1,185 +1,245 @@
-# CyberTrap-AI: Honeypot-Based Attack Intelligence and Threat Analysis Platform
+# CyberTrap-AI: Honeypot-Based Attack Intelligence Platform
 
-## 🎯 Overview
+Advanced cybersecurity platform using honeypots to detect, analyze, and respond to cyber attacks.
 
-CyberTrap-AI is an advanced cybersecurity platform designed to deploy and manage honeypots, analyze attack patterns, and provide real-time threat intelligence. The platform enables organizations to understand attacker behavior, identify emerging threats, and strengthen their security posture.
+## Features
 
-## ✨ Key Features
+- **Multi-Honeypot Support**: SSH, HTTP, FTP, Telnet, SMTP, DNS, MySQL
+- **Real-time Attack Detection**: Monitor and analyze attack patterns
+- **User Management**: Role-based access control (RBAC)
+- **Two-Factor Authentication**: Enhanced security with 2FA
+- **API-First Architecture**: RESTful API for programmatic access
+- **Analytics Dashboard**: Comprehensive attack analytics
+- **Audit Logging**: Complete audit trail for compliance
+- **Backup & Recovery**: Automated backup and restore functionality
+- **Notifications**: Real-time alerts via email, Slack, webhooks
+- **Session Management**: Track and manage user sessions
 
-### 🍯 Honeypot Management
-- Multiple honeypot types (SSH, HTTP, FTP, Telnet, Custom)
-- Distributed deployment across multiple locations
-- Real-time monitoring and data collection
-- Configurable honeypot instances
+## Technology Stack
 
-### 🔍 Attack Analysis
-- Real-time attack detection and logging
-- Attack pattern recognition
-- Threat classification and severity assessment
-- Attacker behavior analysis
+- **Backend**: Flask, SQLAlchemy, PostgreSQL
+- **Cache**: Redis
+- **Queue**: Celery with Redis
+- **Frontend**: Bootstrap 5, Jinja2
+- **Authentication**: JWT, PyOTP (2FA)
+- **Server**: Gunicorn, Nginx
+- **Containerization**: Docker, Docker Compose
 
-### 📊 Threat Intelligence
-- IP reputation tracking
-- Attack trend analysis
-- Threat correlation
-- Geolocation-based threat mapping
-- Indicator of Compromise (IoC) database
+## Quick Start
 
-### ⚠️ Alerting & Notifications
-- Real-time alerts on attack detection
-- Customizable notification rules
-- Multi-channel notifications (Email, Slack, Webhook)
-- Alert severity levels
+### Prerequisites
 
-### 📈 Analytics & Reporting
-- Comprehensive dashboards
-- Attack statistics and trends
-- Risk assessment reports
-- Custom report generation
-- Data export capabilities
+- Docker and Docker Compose
+- Python 3.11+
+- PostgreSQL 15+
+- Redis 7+
 
-### 👥 User Management
-- Role-based access control (RBAC)
-- User authentication with 2FA
-- Admin panel for system management
-- Activity logging and audit trails
+### Installation
 
-### 🔒 Security Features
-- End-to-end encryption
-- Secure API with JWT authentication
-- Audit logging
-- Session management
-- IP whitelisting
-
-## 🏗️ Technology Stack
-
-- **Backend**: Flask 3.0, SQLAlchemy 2.0
-- **Database**: PostgreSQL 13+
-- **Caching**: Redis
-- **Task Queue**: Celery
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla + Libraries)
-- **Authentication**: JWT, 2FA (TOTP)
-- **Deployment**: Docker, Kubernetes, Terraform
-- **Monitoring**: Prometheus, Grafana (Optional)
-
-## 📋 Prerequisites
-
-- Python 3.9+
-- PostgreSQL 13+
-- Redis 6+
-- Docker & Docker Compose (for containerized deployment)
-- Node.js 14+ (for frontend build tools)
-
-## 🚀 Quick Start
-
-### 1. Clone the Repository
+1. **Clone the repository**
 ```bash
-git clone https://github.com/luciferxeditor728-dot/CyberTrape-AI.git
+git clone <repository-url>
 cd CyberTrape-AI
 ```
 
-### 2. Setup Virtual Environment
+2. **Copy environment file**
+```bash
+cp .env.example .env
+```
+
+3. **Start with Docker Compose**
+```bash
+docker-compose up -d
+```
+
+4. **Initialize database**
+```bash
+docker-compose exec web flask init-db
+docker-compose exec web flask seed-db
+```
+
+5. **Access the application**
+- Web UI: http://localhost
+- API: http://localhost/api/v1
+- Default credentials: `admin` / `Admin@123456`
+
+### Development Setup
+
+1. **Create virtual environment**
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-### 3. Install Dependencies
+2. **Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure Environment
+3. **Set up environment variables**
 ```bash
 cp .env.example .env
-# Edit .env with your configuration
 ```
 
-### 5. Initialize Database
+4. **Initialize database**
 ```bash
-flask db upgrade
-python scripts/init_db.py
-python scripts/create_admin.py
+flask init-db
+flask seed-db
 ```
 
-### 6. Run Development Server
+5. **Run development server**
 ```bash
 flask run
 ```
 
-Server will be available at `http://localhost:5000`
+## API Documentation
 
-## 🐳 Docker Deployment
+### Authentication
 
-```bash
-docker-compose up -d
+**POST** `/api/v1/auth/login`
+```json
+{
+  "username": "admin",
+  "password": "password"
+}
 ```
 
-## 📚 Documentation
-
-- [Installation Guide](docs/INSTALLATION.md)
-- [Configuration Guide](docs/CONFIGURATION.md)
-- [Architecture Documentation](docs/ARCHITECTURE.md)
-- [API Documentation](docs/API_DOCUMENTATION.md)
-- [Deployment Guide](docs/DEPLOYMENT_GUIDE.md)
-- [Security Guidelines](docs/SECURITY.md)
-- [Troubleshooting](docs/TROUBLESHOOTING.md)
-
-## 🔐 Security
-
-Security is a core concern. Please see [SECURITY.md](docs/SECURITY.md) for:
-- Security best practices
-- Reporting vulnerabilities
-- Security configuration
-- Data protection measures
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-pytest
-
-# Run with coverage
-pytest --cov=app
-
-# Run specific test suite
-pytest tests/unit/
-pytest tests/integration/
+**Response**
+```json
+{
+  "success": true,
+  "user": {...},
+  "tokens": {
+    "access_token": "eyJ...",
+    "refresh_token": "eyJ...",
+    "token_type": "Bearer"
+  }
+}
 ```
 
-## 📦 Project Structure
+### Users
+
+**GET** `/api/v1/users` - Get all users (Admin only)
+**GET** `/api/v1/users/{user_id}` - Get user details
+**PUT** `/api/v1/users/{user_id}` - Update user
+**DELETE** `/api/v1/users/{user_id}` - Delete user
+
+### Analytics
+
+**GET** `/api/v1/analytics/dashboard` - Dashboard data
+**GET** `/api/v1/analytics/attacks` - Attack statistics
+**GET** `/api/v1/analytics/threats` - Threat data
+
+## Directory Structure
 
 ```
 CyberTrape-AI/
-├── app/                 # Main application package
-├── tests/              # Test suites
-├── deploy/             # Deployment configurations
-├── docs/               # Documentation
-├── scripts/            # Utility scripts
-└── ...
+├── app/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── constants.py
+│   ├── extensions.py
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── templates/
+│   ├── static/
+│   ├── utils/
+│   ├── tasks/
+│   └── migrations/
+├── tests/
+├── docker-compose.yml
+├── Dockerfile
+├── requirements.txt
+├── run.py
+├── .env.example
+├── .gitignore
+└── README.md
 ```
 
-## 🤝 Contributing
+## Configuration
 
-Contributions are welcome! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
+Key environment variables:
 
-## 📝 License
+- `FLASK_ENV`: development, production, testing
+- `DATABASE_URL`: PostgreSQL connection string
+- `REDIS_URL`: Redis connection URL
+- `SECRET_KEY`: Flask secret key
+- `JWT_SECRET_KEY`: JWT signing key
+- `MAIL_*`: Email configuration
 
-MIT License - See LICENSE file for details
+## Database Migrations
 
-## 📧 Support
+```bash
+# Create migration
+flask db migrate -m "Description"
 
-For issues, questions, or suggestions:
-- Open an issue on GitHub
-- Contact: support@cybertrap.ai
-- Documentation: https://docs.cybertrap.ai
+# Apply migrations
+flask db upgrade
 
-## 🙏 Acknowledgments
+# Rollback
+flask db downgrade
+```
 
-Built with security researchers and threat intelligence professionals in mind.
+## Testing
 
----
+```bash
+# Run tests
+pytest
 
-**Status**: Under Active Development 🚧
+# With coverage
+pytest --cov=app tests/
+```
 
-**Last Updated**: June 28, 2024
+## Deployment
+
+### Docker Production Build
+
+```bash
+docker-compose -f docker-compose.yml build
+docker-compose -f docker-compose.yml up -d
+```
+
+### Environment Setup
+
+Update `.env` with production values:
+
+```bash
+FLASK_ENV=production
+DEBUG=False
+SECRET_KEY=<generate-secure-key>
+JWT_SECRET_KEY=<generate-secure-key>
+```
+
+## Security
+
+- All passwords are hashed using bcrypt
+- JWT tokens with configurable expiration
+- CSRF protection on all forms
+- SQL injection prevention via SQLAlchemy ORM
+- Rate limiting on API endpoints
+- Secure session management
+- 2FA support with TOTP
+
+## Monitoring
+
+- Centralized logging to file and console
+- Activity logs for all user actions
+- Audit logs for system changes
+- Redis monitoring
+- Celery task monitoring
+
+## Contributing
+
+1. Create a feature branch: `git checkout -b feature/name`
+2. Commit changes: `git commit -am 'Add feature'`
+3. Push to branch: `git push origin feature/name`
+4. Create Pull Request
+
+## License
+
+MIT License
+
+## Support
+
+For issues and questions, please open an issue on GitHub.
