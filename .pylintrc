@@ -1,0 +1,23 @@
+[MASTER]
+jobs=4
+persistent=yes
+unsafe-load-any-extension=no
+
+[MESSAGES CONTROL]
+disable=
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring,
+    too-few-public-methods,
+    too-many-arguments,
+    too-many-branches,
+    too-many-locals,
+
+[FORMAT]
+max-line-length=88
+
+[DESIGN]
+min-public-methods=1
+
+[VARIABLES]
+ignored-argument-names=_.*
